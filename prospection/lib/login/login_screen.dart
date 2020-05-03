@@ -1,4 +1,4 @@
-import 'package:prospection/auth_service.dart';
+import 'package:prospection/login/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:prospection/home_screen.dart';
-import 'package:prospection/login_screen.dart';
+import 'package:prospection/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class AuthService {

@@ -1,5 +1,7 @@
-import 'package:prospection/auth_service.dart';
+import 'package:prospection/login/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:prospection/company/companyCards.dart';
+import 'package:prospection/name/nameCards.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,34 +14,45 @@ class _HomePageState extends State<HomePage> {
 //class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final title = 'Basic List';
+    final title = 'Welcome';
     return MaterialApp(
       title: title,
       home: Scaffold(
         appBar: AppBar(
           title: Text(title),
+          centerTitle: true,
         ),
-        body: ListView(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Company'),
-            ),
-            ListTile(
-              leading: Icon(Icons.group_work),
-              title: Text('Sector'),
-            ),
-            ListTile(
-              leading: Icon(Icons.face),
-              title: Text('Name'),
-            ),
-            ListTile(
-              title: Text('Sign out'),
-              onTap: () {
-              AuthService().signOut();
-             },
-            ),
-          ],
+        body: Container (
+          child: ListView (
+            children: [
+              ListTile(
+                leading: Icon(Icons.home),
+                title: Text('Company'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CompanyCards()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.face),
+                title: Text('Name'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NameCards()),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text('Sign out'),
+                onTap: () {
+                AuthService().signOut();
+              },
+              ),
+            ],
+          ),
         ),
       ),
     );
