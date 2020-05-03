@@ -8,8 +8,6 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-
-
 class _HomePageState extends State<HomePage> {
 //class MyApp extends StatelessWidget {
   @override
@@ -28,6 +26,7 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 leading: Icon(Icons.home),
                 title: Text('Company'),
+                trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -38,6 +37,7 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 leading: Icon(Icons.face),
                 title: Text('Name'),
+                trailing: Icon(Icons.keyboard_arrow_right),
                 onTap: () {
                   Navigator.push(
                     context,
