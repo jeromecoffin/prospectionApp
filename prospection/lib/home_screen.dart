@@ -6,25 +6,41 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+
+
 class _HomePageState extends State<HomePage> {
+//class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('You are logged in'),
-          SizedBox(height: 10.0),
-          RaisedButton(
-            onPressed: () {
-              AuthService().signOut();
-            },
-            child: Center(
-              child: Text('Sign out'),
+    final title = 'Basic List';
+    return MaterialApp(
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: ListView(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Company'),
             ),
-            color: Colors.red,
-          )
-        ],
+            ListTile(
+              leading: Icon(Icons.group_work),
+              title: Text('Sector'),
+            ),
+            ListTile(
+              leading: Icon(Icons.face),
+              title: Text('Name'),
+            ),
+            ListTile(
+              title: Text('Sign out'),
+              onTap: () {
+              AuthService().signOut();
+             },
+            ),
+          ],
+        ),
       ),
     );
   }
