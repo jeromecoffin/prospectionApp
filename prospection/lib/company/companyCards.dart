@@ -1,28 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class CompanyCards extends StatelessWidget {
-  @override
+  const CompanyCards({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
+    return ListTile(
+      title: Row(
+        children: [
+          Expanded(
+            child: Text(
+              document['name'],
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              color: Color(0xffddddff),
+            ),
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              document['phone'],
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+        ],
+      ),
+      onTap: () {
+        print("Should");
+      },
+    );
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Company Cards"),
       ),
-      body: Container(
-        padding: EdgeInsets.fromLTRB(10,10,10,0),
-        height: 220,
-        width: double.maxFinite,
-        child: Card(
-          elevation: 5,
-          child: new Container(
-                  padding: new EdgeInsets.all(32.0),
-                  child: new Column(
-                    children: <Widget>[
-                      new Text('Hello World'),
-                      new Text('How are you?')
-                    ],
-                  ),
-                ),
-        ),
+      body: StreamBuilder(
+        stream: Firestore.instance.collection('company').snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return const Text('Loading...');
+          return ListView.builder(
+            itemExtent: 80.0,
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (context, index) => 
+                _buildListItem(context, snapshot.data.documents[index]),
+
+          );
+
+        }
       ),
     );
   }
