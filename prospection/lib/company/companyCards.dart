@@ -74,8 +74,7 @@ class CompanyCards extends StatelessWidget {
       content: new Wrap(
 
         children: <Widget>[
-          new Flexible(
-            child: new TextField(
+            new TextField(
               autofocus: true,
               decoration: new InputDecoration(
                   labelText: 'Company Name',
@@ -85,10 +84,8 @@ class CompanyCards extends StatelessWidget {
                 companyName = value;
               },
             ),
-          ),
 
-          new Flexible(
-            child: new TextField(
+            new TextField(
               autofocus: true,
               decoration: new InputDecoration(
                   labelText: 'Company Phone',
@@ -98,8 +95,6 @@ class CompanyCards extends StatelessWidget {
                 companyPhone = value;
               },
             )
-          )
-
         ],
 
       ),

@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:prospection/home_screen.dart';
+import 'package:prospection/dashboard.dart';
 import 'package:prospection/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ class AuthService {
       stream: FirebaseAuth.instance.onAuthStateChanged,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return HomePage();
+          return Dashboard();
         } else {
           return LoginPage();
         }
