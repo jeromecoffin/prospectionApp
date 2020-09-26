@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:prospection/company/companyCards.dart';
+import 'package:prospection/name/nameCards.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -14,8 +16,6 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
 
-    _CustomAppBar appBarState() => _CustomAppBar();
-
     return Scaffold(
       key: _scaffoldKey,
       body: Container(
@@ -25,23 +25,40 @@ class _DashboardState extends State<Dashboard> {
             Column(
               children: <Widget>[
                 Container(
-                  color: Colors.red,
                   width: MediaQuery.of(context).size.width,
-                  height: 100.0,
+                  height: 56,
                   child: Center(
                     child: Text(
-                      "Propspection",
+                      "Prospection",
                       style: TextStyle(color: Colors.white, fontSize: 18.0),
                     ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withOpacity(0),
                   ),
                 ),
                 Container(
                   color: Colors.white,
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height-100,
+                  height: MediaQuery.of(context).size.height-76,
                   child: Center(
                     child: new Padding(
-                      padding: const EdgeInsets.only(top: 12.0),
+                      padding: const EdgeInsets.only(top: 0.1),
                       child: new StaggeredGridView.count(
                         crossAxisCount: 4,
                         staggeredTiles: _staggeredTiles,
@@ -57,7 +74,7 @@ class _DashboardState extends State<Dashboard> {
             ),
 
             Positioned(
-              top: 80.0,
+              top: 46.0,
               left: 0.0,
               right: 0.0,
               child: Container(
@@ -70,7 +87,37 @@ class _DashboardState extends State<Dashboard> {
                       color: Colors.white),
                   child: Row(
                     children: [
-                      appBarState()._simplePopupMenu(),
+                      PopupMenuButton<int>(
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            value: 1,
+                            child: Text("Company"),
+
+                          ),
+                          PopupMenuItem(
+                            value: 2,
+                            child: Text("Name"),
+                          ),
+                        ],
+                        icon: Icon(
+                          Icons.more_vert,
+                          color: Colors.red,
+                        ),
+                        onSelected: (value) {
+                          if (value == 1) {
+                            Navigator.push( 
+                              context,
+                              MaterialPageRoute(builder: (context) => CompanyCards()),
+                            );
+                          }
+                          else if (value == 2) {
+                            Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder: (context) => NameCards()),
+                            );
+                          }
+                        },
+                      ),
                       Expanded(
                         child: TextField(
                           decoration: InputDecoration(
@@ -87,7 +134,22 @@ class _DashboardState extends State<Dashboard> {
                           print("Search...");
                         },
                       ),
-                      appBarState()._simplePopupMore(),
+                      PopupMenuButton<int>(
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            value: 1,
+                            child: Text("First"),
+                          ),
+                          PopupMenuItem(
+                            value: 2,
+                            child: Text("Second"),
+                          ),
+                        ],
+                        icon: Icon(
+                          Icons.menu,
+                          color: Colors.red,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -99,44 +161,6 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 }
-
-class _CustomAppBar{
-
-  Widget _simplePopupMore() => PopupMenuButton<int>(
-    itemBuilder: (context) => [
-      PopupMenuItem(
-        value: 1,
-        child: Text("First"),
-      ),
-      PopupMenuItem(
-        value: 2,
-        child: Text("Second"),
-      ),
-    ],
-    icon: Icon(
-      Icons.more_vert,
-      color: Colors.red,
-    ),
-  );
-
-  Widget _simplePopupMenu() => PopupMenuButton<int>(
-    itemBuilder: (context) => [
-      PopupMenuItem(
-        value: 1,
-        child: Text("First"),
-      ),
-      PopupMenuItem(
-        value: 2,
-        child: Text("Second"),
-      ),
-    ],
-    icon: Icon(
-      Icons.menu,
-      color: Colors.red,
-    ),
-  );
-}
-
 
 
 List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
